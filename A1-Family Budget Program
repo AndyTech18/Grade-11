@@ -1,0 +1,228 @@
+
+/**                                                 *
+* Name: Andy Derevyanko                             *
+* Class: ICS3U1-04                                  *
+* Topic: Assignment 1 - Family Budget               */
+
+//start
+#include <iostream>
+#include <iomanip>
+
+int main() {
+
+  using namespace std;
+
+  // declare appropriate variables to store the Jackson salary data, or variables required to calculate it
+  double pJacksonSalary, mJacksonHouse, mJacksonCar, jRate, jWeekHours, jWeek; 
+  
+  // Formatting output to print to two decimal places on the left side of the console
+  cout << fixed << left << setprecision(2);
+  
+  // Prompting user to input values
+  cout << "What is the yearly salary of Papa Jackson? ";
+  cin >> pJacksonSalary;
+  cout << "How much house insurance did Mama Jackson sell? ";
+  cin >> mJacksonHouse;
+  cout << "How much car insurance did Mama Jackson sell? ";
+  cin >> mJacksonCar;
+  cout << "Enter Juniour's hourly rate: ";
+  cin >> jRate;
+  cout << "Enter Junior's number of hours per week: ";
+  cin >> jWeekHours;
+  cout << "Enter number of week Junior worked: ";
+  cin >> jWeek;
+  
+  // Calculate Mama Jackson's salary
+  double mJacksonSalary = 0.125 * mJacksonHouse + 0.098 * mJacksonCar;
+  
+  // Calculate Junior Jackson's salary
+  double jJacksonSalary = jWeekHours * jWeek * jRate;
+  
+  // Calculate the total family income
+  double tJacksonIncome = mJacksonSalary + pJacksonSalary + jJacksonSalary;
+  
+  // Calculate the average family income
+  double aJacksonIncome = tJacksonIncome/3.0;
+  
+  // Print out income-related information to the console
+  cout << "--------------------- INCOME ---------------------\n";
+  cout << setw(23) << "Papa Jackson Income:";
+  cout << '$' << pJacksonSalary << endl;
+  cout << setw(23) << "Mama Jackson Income:";
+  cout << '$' << mJacksonSalary << endl;
+  cout << setw(23) << "Junior Jackson Income:";
+  cout << '$' << jJacksonSalary << endl;
+  cout << setw(23) << "Total family Income:";
+  cout << '$' << tJacksonIncome << endl;
+  cout << setw(23) << "Average family Income:";
+  cout << '$' << aJacksonIncome << endl << endl;
+  
+  // Calculate each member's taxes and other related data
+  double pJacksonTax = 0.2 * pJacksonSalary;
+  double mJacksonTax = 0.15 * mJacksonSalary;
+  double jJacksonTax = 0.05 * jJacksonSalary;
+  double tJacksonTax = pJacksonTax + mJacksonTax + jJacksonTax;
+  double overallTaxRate = (pJacksonTax + mJacksonTax + jJacksonTax)/(tJacksonIncome);
+  double totalNetIncome = (double) tJacksonIncome - (double) tJacksonTax;
+  double averageNetIncome = totalNetIncome/12;
+  
+  // Display header for income tax section
+  cout << "------------------- INCOME TAX --------------------\n";
+  
+  // Display the tax paid by Papa Jackson
+  cout << setw(40) << "Tax paid by Papa Jackson:";
+  cout << '$' << pJacksonTax << endl;
+  
+  // Display the tax paid by Mama Jackson
+  cout << setw(40) << "Tax paid by Mama Jackson:";
+  cout << '$' << mJacksonTax << endl;
+  
+  // Display the tax paid by Junior Jackson
+  cout << setw(40) << "Tax paid by Junior Jackson:";
+  cout << '$' << jJacksonTax << endl;
+  
+  // Display the total amount of tax paid by the family
+  cout << setw(40) << "Total amount of Tax paid by the family:";
+  cout << '$' << tJacksonTax << endl;
+  
+  // Display the overall tax rate as a percentage
+  cout << setw(40) << "Overall tax rate as a percentage is:";
+  cout << '%' << overallTaxRate*100 << endl;
+  
+  // Display the total net income
+  cout << setw(40) << "Total net Income:";
+  cout << '$' << totalNetIncome << endl;
+  
+  // Display the average monthly net income
+  cout << setw(40) << "Average monthly net income:";
+  cout << '$' << averageNetIncome << endl << endl;
+  
+  // Declare variables for investment section
+  int sharePriceWhole, shareNumerator, shareDenominator;
+  
+  // Display header for investment section and prompt for input
+  cout << "------------------- INVESTMENT --------------------\n";
+  cout << "Please enter price for one share of stock...\n";
+  cout << "Please enter the whole number portion: ";
+  cin >> sharePriceWhole;
+  cout << "Please enter the numerator of the fraction portion: ";
+  cin >> shareNumerator;
+  cout << "Please enter the denominator of the fraction portion: ";
+  cin >> shareDenominator;
+  
+  // Calculate and display amount of investment and number of shares invested
+  double amountInvestment = 0.08 * totalNetIncome;
+  double sharePrice = sharePriceWhole + ((double) shareNumerator)/((double) shareDenominator);
+  double stockNumber = amountInvestment/sharePrice;
+  cout << setw(37) << "Amount of investment: ";
+  cout << '$' << amountInvestment << endl;
+  cout << setw(37) << "Number of shares of stock invested: ";
+  cout << (int) stockNumber << endl << endl;
+  
+  // Declare variables for electricity expenses section
+  double unitsElectricity, monthsDiscount;
+  
+  // Display header for electricity expenses section and prompt for input
+  cout << "----------------Expenses ELECTRICITY---------------\n";
+  cout << "How many units of electricity over the year? ";
+  cin >> unitsElectricity;
+  cout << "After how many months did the discount finish? ";
+  cin >> monthsDiscount;
+  
+  // Calculate and display the total cost of electricity for the year (using given formula)
+  double totalElectricity = 1.02* (0.16 * unitsElectricity - 0.16 * unitsElectricity * 0.1 * monthsDiscount/12.0 - 50); 
+  /*note* the above formula is not what is described in the assignment description, but is the one that was used to generate the sample input that   was provided with the assignment, to ensure parity */
+  cout << "Total cost of electricity bill for the year: " << '$' << totalElectricity << endl << endl;
+
+  // Declare variables for the phone bill expenses
+  double yearMinutes, timeBlockMinutes, costMinutes;
+  
+  // Prompt the user for phone bill expense data
+  cout << "----------------Expenses PHONE BILL---------------\n";
+  cout << "Number of minutes spent over the year: ";
+  cin >> yearMinutes;
+  cout << "Number of minutes in a block of time: ";
+  cin >> timeBlockMinutes;
+  cout << "Cost for each block of time: ";
+  cin >> costMinutes;
+  
+  // Calculate the phone bill cost
+  double phoneCost = costMinutes * (int)(yearMinutes/timeBlockMinutes);
+  
+  // Output the phone bill cost
+  cout << "Cost of the phone bill: $" << phoneCost;
+  cout << endl << endl;
+  
+  // Declare variables for the gas expenses
+  string make;
+  double distance, fuelEfficiency, averageGasPrice, totalGasCost;
+  
+  // Prompt the user for gas expense data, and assign inputs to the gas expenses variables
+  cout << "----------------Expenses GAS COST---------------\n";
+  cout << "Brand and type of the vehicle: ";
+  cin.ignore();
+  getline(cin, make);
+  cout << "Distance travelled over the year: ";
+  cin >> distance;
+  cout << "Fuel Efficiency (km/L): ";
+  cin >> fuelEfficiency;
+  cout << "Average gas price ($/L): ";
+  cin >> averageGasPrice;
+  
+  // Calculate the total gas cost
+  totalGasCost = averageGasPrice * distance/fuelEfficiency;
+  
+  // Output the total gas cost
+  cout << "Total cost of gasoline for the year: $" << totalGasCost;
+  cout << endl << endl;
+  
+  // Declare variables for the mortgage expenses
+  double mortgageAmount, totalMortgagePayment;
+  
+  // Prompt the user for mortgage expense data
+  cout << "----------------Expenses MORTGAGE---------------\n";
+  cout << "Amount of bi-weekly mortgage payment: ";
+  cin >> mortgageAmount;
+  
+  // Calculate the total mortgage payment
+  totalMortgagePayment = 26 * mortgageAmount;
+  
+  // Output the total mortgage payment
+  cout << "Total mortgage payment for the year: $" << totalMortgagePayment;
+  cout << endl << endl;
+  
+  // Calculate the remaining amount after subtracting expenses and investment from the total net income
+  double remainingAmount = totalNetIncome - amountInvestment - totalElectricity - phoneCost - totalGasCost - totalMortgagePayment;
+  
+  // Calculate the expenses for groceries, entertainment, and cash savings based on the remaining amount
+  double groceriesExpenses = remainingAmount * 0.6;
+  double entertainmentExpenses = remainingAmount * 0.25;
+  double cashSaving = remainingAmount * 0.15;
+  
+  // Output the other expenses 
+  cout << "----------------OTHER EXPENSES---------------\n";
+  cout << setw(30) << "Amount used on groceries:";
+  cout << '$' << groceriesExpenses << endl;
+  cout << setw(30) << "Amount used on entertainment:";
+  cout << '$' << entertainmentExpenses << endl;
+  cout << setw(30) << "Amount of cash saving:";
+  cout << '$' << cashSaving << endl << endl;
+  
+  // Calculate the gross income, taxes paid, total expenses, and total reserve by using the Jackons' total income, each expense, and their taxes
+  double grossIncome = tJacksonIncome;
+  double taxesPaid = tJacksonTax;
+  double totalExpenses = entertainmentExpenses + groceriesExpenses + totalMortgagePayment + totalGasCost + phoneCost + totalElectricity;
+  double totalReserve = grossIncome - totalExpenses - taxesPaid;
+
+  /*Display a header titled "summary" and output all overall costs to the console with appropriate descriptions (The Jacksons' gross income, taxes, expenses, and total reserve)*/
+  cout << "------------------SUMMARY-----------------\n";
+  cout << setw(30) << "Total household gross income:";
+  cout << '$' << grossIncome << endl;
+  cout << setw(30) << "Total income tax paid:";
+  cout << '$' << taxesPaid << endl;
+  cout << setw(30) << "Total expenses:";
+  cout << '$' << totalExpenses << endl;
+  cout << setw(30) << "Total reserve:";
+  cout << '$' << totalReserve << endl << endl;
+  
+}
