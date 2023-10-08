@@ -1,0 +1,362 @@
+/**                                                 *
+* Name: Andy Derevyanko                             *
+* Class: ICS3U1-04                                  *
+* Topic: Assignment 2 - Conditionals                */
+
+
+
+//importing required libraries (cmath for use of absolute value function and iomanip for formatting)
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
+using namespace std;
+
+//function to format console headers for aesthetics
+string header(string input){
+  string output;
+  
+  //add newline character to separate header from previous output
+  output.push_back('\n');
+  
+  //add asterisks to create a border around the header text
+  for(int i = 2; i< (50 - input.length())/2;i++)
+      output.push_back('*');
+  
+  //add the header text to the output
+  output.append(' ' + input + ' ');
+  
+  //add asterisks to complete the border around the header text
+  for(int i = 2; i< (50 - input.length())/2;i++)
+      output.push_back('*');
+  
+  //add newline character to separate header from the next output
+  output.push_back('\n');
+  
+  //return the final output
+  return output;
+}
+
+//main function
+int main() {                   
+  
+  //set floating point precision to one decimal place
+  cout << fixed << setprecision(1);
+
+
+
+
+  
+  //Check the speed Program
+  //display header for this section
+  cout << header("Check the speed Program");
+  
+  double speed;
+  
+  //get user input for speed
+  cout << "Please enter the speed of the vehicle: ";
+  cin >> speed;
+  
+  //check if speed is too slow
+  if(speed < 20)
+    cout << "too slow";
+  
+  //check if speed is too fast
+  else if (speed > 80)
+    cout << "too fast";
+  
+  //speed is within the acceptable range
+  else 
+    cout << "just right";
+  
+  //add newline character to separate output from the next section
+  cout << endl;
+
+
+
+
+  
+  //Find future dates
+  //display header for this section
+  cout << header("Find future dates");
+  
+  int day, daysElapsed;
+  
+  //get user input for the current day of the week and the number of days elapsed
+  cout << "Enter today's day: ";
+  cin >> day;
+  cout << "Enter the number of days elapsed since today: ";
+  cin >> daysElapsed;
+
+  //output the current day of the week
+  cout << "Today is ";
+  switch(day){
+    case 0:
+      cout << "Sunday";
+      break;
+    case 1:
+      cout << "Monday";
+      break;
+    case 2:
+      cout << "Tuesday";
+      break;
+    case 3:
+      cout << "Wednesday";
+      break;
+    case 4:
+      cout << "Thursday";
+      break;
+    case 5:
+      cout << "Friday";
+      break;
+    case 6:
+      cout << "Saturday";
+      break;
+    default:
+      cout << "Out of Bounds";
+  }
+
+  //output the future day of the week based on the current day of the week and the number of days elapsed
+  cout << " and the future day is ";
+  switch((day+daysElapsed)%7){
+    case 0:
+      cout << "Sunday";
+      break;
+    case 1:
+      cout << "Monday";
+      break;
+    case 2:
+      cout << "Tuesday";
+      break;
+    case 3:
+      cout << "Wednesday";
+      break;
+    case 4:
+      cout << "Thursday";
+      break;
+    case 5:
+      cout << "Friday";
+      break;
+    case 6:
+      cout << "Saturday";
+      break;
+    default:
+      cout << "Out of Bounds";
+  }
+
+  //add newline character to separate output from the next section
+  cout << endl;
+
+
+
+
+  
+  //Health application: BMI
+  //Print header using the header() function
+  cout << header("Health application: BMI");
+
+  //Declare necessary variables
+  double weight, heightFeet, heightInches, bmi;
+
+  //Prompt user to input weight in pounds, feet, and inches, then store values in respective variables
+  cout << "Enter weight in pounds: ";
+  cin >> weight;
+  cout << "Enter feet: ";
+  cin >> heightFeet;
+  cout << "Enter inches: ";
+  cin >> heightInches;
+
+  //Calculate BMI using formula and store in respective variable
+  bmi = 703 * weight/pow((12*heightFeet + heightInches), 2);
+
+  //Print BMI value
+  cout << "BMI is " << bmi << endl;
+
+  //Determine and print weight classification based on BMI value
+  if(bmi > 24.9){
+    if(bmi < 30.0)
+      cout << "Overweight";
+    else
+      cout << "Obese";
+  } else {
+    if(bmi < 18.5)
+      cout << "Underweight";
+    else
+      cout << "Normal";
+  }
+  
+  cout << endl;
+
+
+
+
+  
+  //Comparing Integers
+  //Print header using the header() function
+  cout << header("Comparing Integers");
+
+  //Declare necessary variables
+  int sideA, sideB, sideC;
+
+  //Prompt user to input side lengths of a triangle, then store values in respective variables
+  cout << "Enter the sides of the triangle:\n";
+  cout << "Enter side A: ";
+  cin >> sideA;
+  cout << "Enter side B: ";
+  cin >> sideB;
+  cout << "Enter side C: ";
+  cin >> sideC;
+
+  //Determine and print triangle classification based on side lengths
+  if(sideA == sideB && sideC == sideA)
+    cout << "Equilateral Triangle";
+  else if(sideA == sideB || sideC == sideA || sideC == sideB)
+    cout << "Isosceles Triangle";
+  else
+    cout << "Scalene Triangle";
+  
+  cout << endl;
+
+
+
+
+  
+  // Display the day and remaining hours
+  // Outputs the header for this section
+  cout << header("Display the day and remaining hours");   
+  
+  int dayNumber;
+  double hoursPassed;
+
+  // Prompts the user to enter the day number
+  cout << "Enter the day number: ";   
+
+  // Reads the day number from the console
+  cin >> dayNumber;   
+
+  // Prompts the user to enter the number of hours passed
+  cout << "Enter the number of hours passed: ";   
+  
+  // Reads the number of hours passed from the console
+  cin >> hoursPassed;   
+
+  cout << "Today is ";
+  // Displays the day based on the day number entered by the user
+  switch(dayNumber){   
+    case 1:
+      cout << "Sunday";
+      break;
+    case 2:
+      cout << "Monday";
+      break;
+    case 3:
+      cout << "Tuesday";
+      break;
+    case 4: 
+      cout << "Wednesday";
+      break;
+    case 5:
+      cout << "Thursday";
+      break;
+    case 6:
+      cout << "Friday";
+      break;
+    case 7:
+      cout << "Saturday";
+      break;
+    default:   
+      // Displays an error message if the day number is out of bounds
+      cout << "Out of Bounds";
+  }
+
+  // Outputs a newline character to separate the two lines
+  cout << endl;   
+
+  cout << "Remaining Hours: ";
+  // Calculates and displays the remaining hours in the day
+  cout << 24 - hoursPassed << endl;   
+
+
+
+
+  
+  // Game: Prediction
+  cout << header("Prediction");   // Outputs the header for this section
+
+  // Obtains seed from the random number generator by using the current time
+  srand(time(0));   
+
+  // Generates a random two-digit number between 10 and 99
+  int prediction, accuracy, randomNumber = rand()%90 + 10;  
+
+  cout << "Enter your prediction for the two-digit random number: ";
+  
+  // Reads the user's prediction from the console
+  cin >> prediction;  
+
+  //Calculates the accuracy of the user's prediction by comparing first the 10s digit and 1s digit to that of the random
+  //number, and seeing if any of them match, then setting an accuracy of 0%, 50%, or 100% based on these predictions.
+  if(prediction == randomNumber)   
+    accuracy = 100;
+  else if ((prediction - randomNumber)%10 == 0 || prediction/10 == randomNumber/10)
+    accuracy = 50;
+  else
+    accuracy = 0;
+
+  // Outputs the accuracy of the user's prediction
+  cout << "Your prediction matched the random number with a " << accuracy << "% accuracy." << endl;   
+
+
+
+  
+  //Geometry: point in a circle?
+  //printing the header for Geometry: point in a circle?
+  cout << header("Geometry: point in a circle?");
+  
+  //declaring variables for the coordinates of the point and its distance from origin
+  double x1, y1, distance;
+
+  //prompting user to input the coordinates of the point
+  cout << "Enter a point with two coordinates: ";
+  cin >> x1;
+  cin >> y1;
+
+  //calculating the distance of the point from the origin
+  distance = sqrt(pow(x1,2)+pow(y1,2));
+
+  //printing the result whether the point is inside or outside the circle
+  cout << "Point (" << x1 << ", " << y1 << ") is ";
+  if(distance <= 10)
+    cout << "in the circle";
+  else 
+    cout << "not in the circle";
+
+  //adding a new line character after the result
+  cout << endl;
+
+
+
+  
+  //Geometry: point in a rectangle?
+  //printing the header for Geometry: point in a rectangle?
+  cout << header("Geometry: point in a rectangle?");
+  
+  //declaring variables for the coordinates of the point
+  double x2, y2;
+
+  //prompting user to input the coordinates of the point
+  cout << "Enter a point with two coordinates: ";
+  cin >> x2;
+  cin >> y2;
+  
+  //printing the result whether the point is inside or outside the rectangle (based on the rigid edges of the rectangle, being 
+  //able to be defined using absolute values of a number for x and y)
+  cout << "Point (" << x2 << ", " << y2 << ") is ";
+  if(abs(x2) <= 5 && abs(y2) <= 2.5)
+    cout << "in the rectangle";
+  else
+    cout << "not in the rectangle";
+
+  //adding a new line character after the result
+  cout << endl;
+}
