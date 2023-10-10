@@ -1,0 +1,238 @@
+/*                                                   *
+ * Name: Andy Derevyanko                             *
+ * Class: ICS3U1-04                                  *
+ * Topic: Assignment 3 - 2D Shapes                   */
+
+#include <iostream>
+#include <iomanip> // library used to format summary table at end
+
+using namespace std;
+
+int main() {
+
+   // Declaring variables
+  char choice; // stores user input (whether to draw another shape or not)
+  int shapeType, length, width, height; // stores user input (shape type and dimensions)
+  int shapeCount[] = {0,0,0,0,0,0,0}; // Array of shape counts, with each element representing a shape type
+
+  // Outputting introduction message
+  cout << "Welcome to the Shape Generator:\n\n";
+
+  // Looping until user inputs 'n' or 'N'
+  while(toupper(choice) != 'N'){
+    // Outputting menu of available shapes
+    cout << "This program draws the following shapes:\n";
+    cout << "1) Horizontal Line\n";
+    cout << "2) Vertical Line\n";
+    cout << "3) Rectangle\n";
+    cout <<"4) Left slant right angle triangle\n";
+    cout << "5) Right slant right angle triangle\n";
+    cout << "6) Isosceles triangle\n";
+    cout << "7) double cone\n";
+  
+    // Declaring a string to hold the name of the selected shape type
+    string shapeTypeStr;
+  
+    // Looping until user selects a valid shape type
+    do {
+        cout << "Enter your choice (1-7): ";
+        cin >> shapeType;
+  
+        // Assigning name of the selected shape type to shapeTypeStr based on the selected shape type integer
+        switch(shapeType){
+          case 1:
+            shapeTypeStr = "horizontal line";
+            break;
+          case 2:
+            shapeTypeStr = "vertical line";
+            break;
+          case 3:
+            shapeTypeStr = "rectangle";
+            break;
+          case 4:
+            shapeTypeStr = "left slant right angle triangle";
+            break;
+          case 5:
+            shapeTypeStr = "right slant right angle triangle";
+            break;
+          case 6:
+            shapeTypeStr = "isosceles triangle";
+            break;
+          case 7:
+            shapeTypeStr = "double cone";
+            break;
+        }
+
+        // If selected shape type is not between 1-7, output error message
+        if(shapeType < 1 || shapeType > 7)
+          cout << "\nInvalid choice! Your choice must be between 1 and 7.\n";
+        // Otherwise, increment the count of the selected shape type and exit the loop
+        else
+          shapeCount[shapeType-1]++;
+    } while(shapeType < 1 || shapeType > 7);
+  
+    cout << endl;
+
+  // If selected shape type is a triangle or double cone, prompt user to input the height
+  if(shapeType > 3){
+    do {
+      cout << "Enter the height of the " << shapeTypeStr << ": "; // prompts user to enter the height for the selected shape
+      cin >> height; // read user input and store it in height variable
+      if(height < 1 || height > 20) // validate user input
+        cout << "\nInvalid dimension! The dimension must be between 1 and 20.\n"; // prints error message if user input is invalid
+    } while(height < 1 || height > 20); // continue to prompt the user until a valid input is provided
+  }
+
+  // If selected shape type is a rectangle, prompt user to input the width
+  if(shapeType == 3){
+    do {
+      cout << "Enter the width of the " << shapeTypeStr << ": "; // prompts user to enter the width for the selected shape
+      cin >> width; // read user input and store it in width variable
+      if(width < 1 || width > 20) // validate user input
+        cout << "\nInvalid dimension! The dimension must be between 1 and 20.\n"; // prints error message if user input is invalid
+    } while(width < 1 || width > 20); // continue to prompt the user until a valid input is provided
+    cout << endl;
+  }
+
+  // If selected shape type is a line or triangle, prompt user to input the length
+  if(shapeType <= 3){
+    do {
+      cout << "Enter the length of the " << shapeTypeStr << ": "; // prompts user to enter the length for the selected shape
+      cin >> length; // read user input and store it in length variable
+      if(length < 1 || length > 20) // validate user input
+        cout << "\nInvalid dimension! The dimension must be between 1 and 20.\n"; // prints error message if user input is invalid
+    } while(length < 1 || length > 20); // continue to prompt the user until a valid input is provided
+      
+  }
+  
+  cout << endl;
+  
+  cout << "Here is the " << shapeTypeStr << " with ";
+  
+  if(shapeType < 3)
+    cout << "length " << length << ":\n\n"; // prints the length of the shape if the selected shape is a line or triangle
+      
+  if(shapeType == 3)
+    cout << "width " << width << " and height " << height << ":\n\n"; // prints the width and height of the rectangle if the selected shape is a rectangle
+
+  if(shapeType > 3)
+     cout << "height " << height << ":\n\n";
+    
+      // Switch statement to select and draw the shape according to user input
+  switch(shapeType){
+    // Case 1: Horizontal Line
+    case 1:
+      for(int i = 0; i < length; i++)
+        cout << '*';
+      break;
+
+    // Case 2: Vertical Line
+    case 2:
+      for(int i = 0; i < length; i++)
+        cout << "*\n";
+      break;
+
+    // Case 3: Rectangle
+    case 3:
+      for(int i = 0; i < length; i++){
+        for(int j = 0; j < width; j++){
+          cout << "*";
+        }
+        cout << '\n';
+      }
+      break;
+
+    // Case 4: Left slant right angle triangle
+    case 4:
+      for(int i = 0; i <= height; i++){
+        for(int j = 0; j < i; j++)
+          cout << '*';
+        cout << '\n';
+      }
+      break;
+
+    // Case 5: Right slant right angle triangle
+    case 5:
+      for(int i = 0; i <= height; i++){
+        for(int j = height - i; j > 0; j--)
+          cout << ' '; //enter spaces to make sure that aterisks enter later are aligned
+        for(int k = 0; k < i; k++)
+          cout << '*'; //draw aterisks in series (n aterisks for each line n)
+        cout << '\n';
+      }
+      break;
+
+    // Case 6: Isosceles triangle
+    case 6:
+      {
+        int baseLength = 2 * height - 1;
+  
+        for(int i = 1; i <= height; i++){
+          for(int j = 1; j <= baseLength - i; j++){
+            cout << ' '; // for each lin
+          }
+          for(int k = 1; k <= 2*i-1; k++)
+            cout << '*'; 
+          cout << endl;
+        }
+        break;
+      }
+
+    // Case 7: Double cone
+    case 7:
+      for(int i = height/2 + height%2; i >= 1; i--){
+        for(int j = 1; j <= height/2 + height%2 - i; j++){
+          cout << ' '; // output number of spaces before the line based on the size of the cone
+        }
+        for(int k = 1; k <= 2*i - 1; k++)
+          cout << '*'; // output the aterisks that constitute the first half of the cone
+        cout << endl;
+      }
+
+      for(int i = 2 + height%2 - 1; i <= height/2 + height%2; i++){
+        for(int j = 1; j <= height/2 + height%2 - i; j++){
+          cout << ' '; // output number of spaces before the line based on the size of the cone
+        }
+        for(int k = 1; k <= 2*i - 1; k++)
+          cout << '*'; //output the aterisks that constitue the bottom half of the cone
+        cout << endl;
+      }
+      break;
+  }
+
+  // Print a newline character
+  cout << endl;
+    
+   // A do-while loop that prompts the user to draw another shape and validates their input
+   do {
+        cout << "Would you like to draw another shape (y/n)? ";
+        cin >> choice;
+        if(toupper(choice) != 'Y' && toupper(choice) != 'N') // Checks if the input is not 'y' or 'n'
+          cout << "\n\nInvalid input! Your input must be ‘y’ or ‘n’.\n"; // Error message for invalid input
+      } while (toupper(choice) != 'Y' && toupper(choice) != 'N'); // Loop continues if the input is invalid
+  
+      cout << endl; 
+    
+  } // end the loop that makes the program run
+
+  // Outputs a summary of the shapes that were drawn
+  cout << "Here is a summary of the shapes that were drawn\n\n";
+
+  cout << setw(35) << left << "Horizontal line"; 
+  cout << shapeCount[0] << endl; // Outputs the count of horizontal lines and adds a new line
+  cout << setw(35) << left << "Vertical line"; 
+  cout << shapeCount[1] << endl; // Outputs the count of vertical lines and adds a new line
+  cout << setw(35) << left << "Rectangle"; 
+  cout << shapeCount[2] << endl; // Outputs the count of rectangles and adds a new line
+  cout << setw(35) << left << "Left slant right angle triangle"; 
+  cout << shapeCount[3] << endl; // Outputs the count of left slant right angle triangles and adds a new line
+  cout << setw(35) << left << "Right slant right angle triangle"; 
+  cout << shapeCount[4] << endl; // Outputs the count of right slant right angle triangles and adds a new line
+  cout << setw(35) << left << "Isosceles triangle"; 
+  cout << shapeCount[5] << endl; // Outputs the count of isosceles triangles and adds a new line
+  cout << setw(35) << left << "Double cone"; 
+  cout << shapeCount[6] << endl; // Outputs the count of double cones and adds a new line
+
+  cout << "Thank you for using Shape Generator.  Goodbye!!"; // Outputs a closing message
+    return 0;
+}
